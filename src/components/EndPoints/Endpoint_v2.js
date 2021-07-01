@@ -1,11 +1,11 @@
 import axios from "axios";
 
 
-const URLpoke = `${process.env.REACT_APP_POKEDEX_BAE_URL}`;
+const URL = `${process.env.REACT_APP_POKEDEX_BAE_URL}`;
 export async function envAPI(props) {
     try {
         const response = await axios({
-            url: `${URLpoke}${props}`,
+            url: `${URL}${props}`,
             method: `GET`
         })
         return response
@@ -29,3 +29,26 @@ export async function API(props) {
     }
 }
 
+export const ApiPost = async (props, dat) => {
+    try {
+        const resp = await axios.post(`${URL}${props}`, dat);
+        return resp;
+    } catch (err) {
+        return err;
+    }
+};
+
+export async function envApiDirToken(props, tk) {
+    try {
+        const resp = await axios.get(`${URL}${props}`, {
+            headers: {
+                'Authorization': `Bearer ${tk}`
+            }
+        })
+        return resp;
+    }
+    catch (e) {
+        console.log(e)
+    }
+
+}
